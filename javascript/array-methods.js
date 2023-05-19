@@ -5,6 +5,7 @@ const newArray = new Array(6);   // Creates an array with empty elements.
 array.length;                    // Represents the number of elements in that array.
 
 // Methods
+array.at();                 // Same as array[i], but works with negatives as well.
 array.concat();             // Merges two or more arrays and returns a new array.
 array.copyWithin();         // Copies part of an array to another location in the same array and returns it without modifying its length.
 array.entries();            // Returns a new array iterator object that contains the key/value pairs for each index in the array.
