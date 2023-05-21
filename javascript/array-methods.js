@@ -5,6 +5,7 @@ const newArray = new Array(6);   // Creates an array with empty elements.
 array.length;                    // Represents the number of elements in that array.
 
 // Methods
+
 array.at();                 // Same as array[i], but works with negatives as well.
 array.concat();             // Merges two or more arrays and returns a new array.
 array.copyWithin();         // Copies part of an array to another location in the same array and returns it without modifying its length.
@@ -13,8 +14,8 @@ array.every();              // Tests all elements in a certain condition. Return
 array.fill();               // Changes all elements with a stated value from start index (default is "0") to end (default is ".length").
 array.filter();             // Creates a shallow copy with filtered elements.
 array.find();               // Returns the first element that satisfies the condition.
-  array.findIndex(number);
-  array.indexOf(value);
+  array.findIndex();
+  array.indexOf();
 array.findLast();           // Same as .find() but in reverse.
   array.findLastIndex();
 array.flat();               // Creates a new array with sub-array elements concatenated into specified depth.
@@ -45,3 +46,60 @@ array.toLocaleString();     // Converts to strings using their <toLocaleString> 
 array.toString();           // Returns a string with all the elements.
 array.values();             // Returns a new Array Iterator Object that iterates the value of each element.
 array.with();               // Changes the value of a given index in the array. It doesn't change the original array.
+
+
+// Syntaxes and examples
+
+// .at()
+array.at(index);
+const arrayOne = ['apple', 'banana', 'orange' , 'pear'];
+arrayOne.at(-2);  // "orange"
+
+// .concat()
+array.concat(value0, value1);
+const arrayTwo = [1, 2, 3];
+arrayOne.concat(arrayTwo);  // [ "apple", "banana", "orange" , "pear", 1, 2, 3 ]
+
+// .copyWithin()
+array.copyWithin(target/index, start, end);  // without <end>, it copies from the index to the end
+const arrayThree = ['apple', 'banana', 'orange' , 'pear'];
+arrayThree.copyWithin(1, 2, 3);  // [ "apple", "orange", "orange" , "pear" ]
+
+// .entries()
+array.entries();
+const arrayLetters = ['a', 'b', 'c'];
+const iterateLetters = arrayLetters.entries();
+iterateLetters.next().value;  // Array [0, "a"]
+iterateLetters.next().value;  // Array [1, "b"]
+
+for (const element of arrayLetters) {
+  console.log(element);
+}  // "a", "b", "c"
+
+// .every()
+array.every(callbackFn);
+const arrayFour = [1, 3, 4, 5, 6];
+arrayFour.every((x) => x > 2);  // false
+
+// .fill()
+array.fill(value, start, end);
+const arrayFive = [1, 2, 3, 4];
+arrayFive.fill(8, 2, 4);  // [ 1, 2, 8, 8 ]
+
+// .filter()
+array.filter(callbackFn);
+const arraySix = ['one', 'two', 'three', 'four'];
+arraySix.filter(element => element.length > 3);  // [ "three", "four" ]
+
+// .find() / .findLast()
+array.find(callbackFn);
+  array.findIndex(callbackFn);
+  array.indexOf(value or element);
+array.findLast(callbackFn);
+  array.findLastIndex(callbackFn);
+const arraySeven = [22, 33, 44];
+arraySeven.find(num => num > 30);  // 33
+  arraySeven.findIndex(num => num > 35);  // 2
+  arraySeven.indexOf(22);  // 0
+arraySeven.findLast(num => num < 50);  // 44
+arraySeven.findLastIndex(num => num < 50);  // 2
