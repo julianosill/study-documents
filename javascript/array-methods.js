@@ -23,7 +23,7 @@ array.flat();               // Creates a new array with sub-array elements conca
 array.forEach();            // Iterates through each element.
 array.from();               // Creates a new shallow-copy from an iterable array.
 array.includes();           // Checks if an array includes the value and returns a boolean.
-array.isArray();            // Determines wheter is an array or not.
+Array.isArray();            // Determines whether is an array or not.
 array.join();               // Returns a string by concatenating all the elements (default separator is ",").
 array.keys();               // Returns a new Array Iterator Object containing the keys for each index.
 array.map();                // Creates an array with the results of the function called on every element.
@@ -74,7 +74,12 @@ iterateLetters.next().value;  // Array [1, "b"]
 
 for (const element of arrayLetters) {
   console.log(element);
-}  // "a", "b", "c"
+}
+/*
+  "a"
+  "b"
+  "c"
+*/
 
 // .every()
 array.every(callbackFn);
@@ -94,7 +99,7 @@ arraySix.filter(element => element.length > 3);  // [ "three", "four" ]
 // .find() / .findLast()
 array.find(callbackFn);
   array.findIndex(callbackFn);
-  array.indexOf(value or element);
+  array.indexOf(value);
 array.findLast(callbackFn);
   array.findLastIndex(callbackFn);
 const arraySeven = [22, 33, 44];
@@ -103,3 +108,151 @@ arraySeven.find(num => num > 30);  // 33
   arraySeven.indexOf(22);  // 0
 arraySeven.findLast(num => num < 50);  // 44
 arraySeven.findLastIndex(num => num < 50);  // 2
+
+// .flat()
+array.flat(depth);  // default is 1.
+  array.flatMap(callbackFn);
+const arrayEight = [1, 2, 3, [4, [5, 6]], [7, 8]];
+arrayEight.flat();  // [ 1, 2, 3, 4, [ 5, 6 ], 7, 8 ]
+arrayEight.flat(2);  // [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+arrayEight.flatMap(num => num > 1 ? true : num);  // [ 1, true, true, 4, [ 5, 6 ], 7, 8 ]
+
+// .forEach()
+array.forEach(callbackFn);
+const arrayNine = ['one',  'two', 'three'];
+arrayNine.forEach(element => console.log(`Item: ${element}`));
+/*
+  Item: one
+  Item: two
+  Item: three
+*/
+
+// .from()
+Array.from(arrayLike, mapFn);
+Array.from('string');  // [ "s", "t", "r", "i", "n", "g" ]
+Array.from('string', letter => letter.toUpperCase());  // [ "S", "T", "R", "I", "N", "G" ]
+
+// .includes()
+array.includes(searchElement, fromIndex);
+arrayNine.includes('one');  // true
+arrayNine.includes('on');  // false
+arrayNine.includes('one', 1);  // false
+
+// Array.isArray()
+Array.isArray(arrayNine);  // true
+const falseArray = '[]';
+Array.isArray(falseArray);  // false
+
+// .join()
+array.join(separator);  // default is ","
+const joinArray = ['H', 'e', 'l', 'l', 'o'];
+joinArray.join();  // H,e,l,l,o
+joinArray.join('');  // Hello
+joinArray.join('.');  // H.e.l.l.o
+
+// .keys()
+array.keys();
+const arrayTen = ['a', 'b', 'c'];
+const arrayTenIterator = arrayTen.keys();
+for( const key of arrayTenIterator) { console.log(key); }
+/*
+  0
+  1
+  2
+*/
+
+// .map()
+array.map(callbackFn);
+arrayTen.map(letter => letter + letter);  // [ "aa", "bb", "cc" ]
+
+// Array.of()
+Array.of(element0, element1);
+Array.of(2);  // [ 2 ]
+Array(2);  // Array with 2 empty slots.
+Array.of("one", 2, true);  // [ "one", 2, true ]
+
+// .pop()
+array.pop();
+const arrayEleven = [ 'one', 'two', 'three'];
+arrayEleven.pop();  // "three"
+arrayEleven;  // [ "one", "two" ]
+
+// .push()
+array.push(element0, element1)
+const arrayTwelve = [1, 2, 3];
+arrayTwelve.push(4, 5, 6);  // 6
+arrayTwelve;  // [ 1, 2, 3, 4, 5, 6];
+
+// .reduce()
+array.reduce(callbackFn, initialValue);
+const arrayThirteen = [1, 2, 3];
+arrayThirteen.reduce((accumulator, currentValue) => accumulator + currentValue);  // 6
+
+// .reduceRight();
+array.reduceRight(callbackFn, initialValue);
+const arrayFourteen = [[1, 2], [3, 4], [5, 6]];
+arrayFourteen.reduceRight((acc, currVal) => acc.concat(currVal));  // [ 5, 6, 3, 4, 1, 2 ]
+
+// .reverse() / .toReversed()
+array.reverse();
+const arrayFifhteen = [1, 2, 3];
+arrayFifhteen.reverse();  // [ 3, 2, 1 ]
+
+// .shift()
+array.shift();
+arrayFifhteen.shift();  // 1
+arrayFifhteen;  // [ 2, 3 ]
+
+// .unshift()
+array.unshift(element0, element1);
+arrayFifhteen.unshift(4);  // 4
+arrayFifhteen;  // [ 4, 1, 2, 3 ]
+
+// .slice()
+array.slice(start, end);
+const arraySixteen = ['chester', 'mike', 'joe', 'phoenix', 'rob', 'brad'];
+arraySixteen.slice(2, 4);  // [ "joe", "phoenix" ]
+
+// .some();
+array.some(callbackFn);
+arraySixteen.some(name => name.length <= 3);  // true
+
+// .sort() / .toSorted()
+array.sort(compareFn);
+const months = ['Jan', 'Feb', 'Mar', 'Apr'];
+months.sort();  // [ "Apr", "Feb", "Jan", "Mar" ]
+const arraySeventeen = [1, 5, 200, 15, 100, 10];
+arraySeventeen.sort();  // [ 1, 10, 100, 15, 200, 5 ]
+const compareNumbers = (a, b) => a - b;
+arraySeventeen.sort(compareNumbers);  // [ 1, 5, 10, 15, 100, 200 ]
+
+// .splice()
+array.splice(start, deleteCount, itemN);
+months.splice(1, 0, 'February', 'March');  // [ "Jan", "February", "March", "Feb", "Mar", "Apr" ]
+months.splice(1, 2, 'February', 'March');  // [ "Jan", "February", "March", "Apr" ]
+
+// .toLocaleString()
+array.toLocaleString(locales, options);
+const number = 123456.789;
+number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });  // R$ 123.456,79
+
+// .toString();
+array.toString();
+const arrayEighteen = [1, 5, 'ten', [2, 6]];
+arrayEighteen.toString();  // "1,5,ten,2,6"
+
+// .values()
+array.values();
+const arrayEighteenIterator = arrayEighteen.values();
+for (const value of arrayEighteenIterator) { console.log(value); }
+/*
+  1
+  5
+  "ten"
+  [ 2, 6 ]
+*/
+
+// .with()
+array.with(index, value);
+const arrayWith = [2, 4, 6, 8];
+arrayWith.with(1, 22);  // [ 2, 22, 6, 8 ]
